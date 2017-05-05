@@ -1,0 +1,23 @@
+.button.customMH.active {
+    background-color: #666;
+}
+.button.customMH:hover {
+    background-color: #666;
+    text-decoration: none;
+    cursor: pointer;
+}
+div.button.customMH{
+    display:block;
+    color:white;
+    float:left;
+    margin-left: -1px;
+    padding: 8px 10px;
+    font-size: 13px;
+    text-align: center;
+    border-bottom: none;
+    border-left: 1px solid #111;
+    border-right: 1px solid #111;
+    border-radius: 0;
+    background-color: #555;
+    position: relative;
+}
