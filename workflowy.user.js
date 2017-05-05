@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.1.7
+// @version      0.2
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
@@ -13,7 +13,6 @@
 (function () {
     'use strict';
     GM_addStyle(GM_getResourceText("css"));
-    console.log("Loaded");
     $(".customMH").remove();
 
     var theNew = $('<div class="customMH button"><div class="topBarButtonTextContainer">@status OR #open</div></div>');
