@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.1.5
+// @version      0.1.7
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
-// @grant        none
+// @grant GM_addStyle
+// @grant GM_getResourceText
 // @resource css workflowy.css
 // ==/UserScript==
 
