@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.2
+// @version      0.2.1
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
