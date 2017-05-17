@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.3.1
+// @version      0.3.2
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
@@ -42,7 +42,7 @@
 	.addClass("imageBar")
 	.css({
 		"position":"fixed",
-		"left": "1050px",
+		"left": "850px",
 		"top": "100px",
 		"width": "200px",
 		"height": "100px",

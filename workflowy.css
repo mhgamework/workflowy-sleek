@@ -7,7 +7,7 @@
     cursor: pointer;
 }
 div.page.active{
-	width:900px !important;
+	//width:900px !important;
 	transform:none !important;
 	margin-left:20px;
 }
