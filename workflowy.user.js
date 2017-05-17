@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.3.3
+// @version      0.3.4
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
@@ -198,6 +198,11 @@
 
 	// When you press any keyboard key
 	$(document).keydown(function(e) {
+	  setTimeout(function() {
+		checkForChanges();
+	  }, 250);
+	});
+	$(document).click(function(e) {
 	  setTimeout(function() {
 		checkForChanges();
 	  }, 250);
