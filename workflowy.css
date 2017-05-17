@@ -6,6 +6,22 @@
     text-decoration: none;
     cursor: pointer;
 }
+div.page.active{
+	width:900px !important;
+	transform:none !important;
+	margin-left:20px;
+}
+.imageBar img{
+	box-shadow: 0 0 20px #831;
+	margin-bottom:5px;
+	background-color:white;
+}
+/*div.content-img img{
+	position:absolute;
+	left:-150px;
+	width:130px;
+	top:-20px;
+}*/
 div.button.customMH{
     display:block;
     color:white;
@@ -20,4 +36,38 @@ div.button.customMH{
     border-radius: 0;
     background-color: #555;
     position: relative;
+}
+
+.lightbox {
+	/** Default lightbox to hidden */
+	display: none;
+
+	/** Position and style */
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+}
+
+.lightbox img {
+	/** Pad the lightbox image */
+	max-width: 90%;
+	max-height: 80%;
+	margin-top: 2%;
+	position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+.lightbox:target {
+	/** Remove default browser outline */
+	outline: none;
+
+	/** Unhide lightbox **/
+	display: block;
 }
