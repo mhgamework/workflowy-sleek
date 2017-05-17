@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.2.1
+// @version      0.3.0
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
@@ -37,4 +37,33 @@
     createButton("@status OR #open-sprint");
     createButton("@status OR #open");
 
+	
+	
+	
+	function do_parseImg() {
+		$(this).nextAll(".content-img").remove();
+		var lines = $(this).text().split("\n");
+		var img_re = /^\!\[.*\]\((.+)\)$/;
+
+		for (var i = 0; i < lines.length; i++) {
+			var line = lines[i].trim();
+			var img = line.match(img_re);
+			if (img === null) {
+				continue;
+			}
+			console.log(i, img[1]);
+			$(this).after('<div class="content-img"><img src="' + img[1] + '"/></div>')
+		}
+	}
+
+	function parseImg() {
+		$("div.notes div.content").live("click keyup", do_parseImg);
+		$("div.notes div.content").each(do_parseImg);
+		$("#expandButton").live("click", function() {
+			$("div.notes div.content").each(do_parseImg);
+		});
+	};
+
+	$(window).bind("load hashchange", parseImg);
+	
 })();
