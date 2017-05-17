@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.3.2
+// @version      0.3.3
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
@@ -15,10 +15,16 @@
     GM_addStyle(GM_getResourceText("css"));
     $(".customMH").remove();
 
-    function createButton(query){
-        var theNew = $('<div class="customMH button"><div class="topBarButtonTextContainer">'+query+'</div></div>');
+	function createButtonToToolbar(text){
+		 var theNew = $('<div class="customMH button"><div class="topBarButtonTextContainer">'+text+'</div></div>');
 
         theNew.insertAfter($("#savedViewHUDButton"));
+		return theNew;
+	}
+	
+    function createButton(query){
+        var theNew = createButtonToToolbar(query);
+
         theNew.click(function () {
             var toSet = query;
             if ($("#searchBox").val() == toSet) {
@@ -33,22 +39,56 @@
             $("#searchBox").submit();
         });
     }
+	
+	function createImageBar(){
+			var $imagebar = $("<div>")
+		.addClass("customMH")
+		.addClass("imageBar")
+		.css({
+			"position":"fixed",
+			"left": "850px",
+			"top": "100px",
+			"width": "200px",
+			"height": "100px",
+			//"background-color": "white"
+		});
+		$("body").append($imagebar);
+		return $imagebar;
+	}
+	
+	var $imagebar = createImageBar();
+	
 
-    createButton("@status OR #open-sprint");
-    createButton("@status OR #open");
+    var imagesbtn$ = createButtonToToolbar("Images: Shown");
+	createButton("@status OR #open-sprint");
+	var imageCount = 0;
+	
+	var imageEnabled = true;
+	imagesbtn$.click(function () {
+		imageEnabled = !imageEnabled;
+		imagesbtn$.text(imageEnabled ? "Images: Shown": "Images: Hidden");
+		imagesbtn$.toggleClass("active", imageEnabled);
+		showBar(imageCount > 0);
+		/*var toSet = query;
+		if ($("#searchBox").val() == toSet) {
+			toSet = "";
+			theNew.toggleClass("active", false);
+		}
+		else {
+			theNew.toggleClass("active", true);
+		}
 
-	var $imagebar = $("<div>")
-	.addClass("customMH")
-	.addClass("imageBar")
-	.css({
-		"position":"fixed",
-		"left": "850px",
-		"top": "100px",
-		"width": "200px",
-		"height": "100px",
-		//"background-color": "white"
+		$("#searchBox").val(toSet);
+		$("#searchBox").submit();*/
 	});
-	$("body").append($imagebar);
+	
+	function showBar(enabled){
+		enabled = imageEnabled && enabled;
+		$("div.page.active").toggleClass("fixPageLeft",enabled);
+		$imagebar.toggle(enabled);
+	}
+
+
 	
 	
 	
@@ -57,6 +97,7 @@
 	var IMAGE_EXTENSIONS = [".png", ".jpg", ".jpeg", ".gif", ".bmp"];
 	//var magicCounter = 0;
 	var magicCounterGlobal = 0;
+	
 	function createImageNodeAfterNode($node, imgSrc) {
 		var id = $node.parents(".project").first().attr("projectid");
 		var imgId = "mhImg"+id;
@@ -101,7 +142,7 @@
 		
 		$a.click(function(){$aPreview.show();});
 		$aPreview.click(function(){$aPreview.hide();});
-		
+		imageCount +=1;
 		//$node.after($div);
 	  //}
 	}
@@ -131,6 +172,7 @@
 
 	function checkForChanges() {
 		magicCounterGlobal += 1;
+		imageCount = 0;
 	  $("div.name div.content, div.notes div.content").each(function(i, node) {
 		generateImagesForContentNode(node);
 	  });
@@ -138,11 +180,12 @@
 	  $("div.name a.contentLink, div.notes a.contentLink").each(function(i, node) {
 		generateImagesForLinkNode(node);
 	  });
-	  console.log("Removing "+(magicCounterGlobal-1));
 	  $(".mhImg").filter(".mhImg"+(magicCounterGlobal-1)).remove();
 
 	  // TODO: These currently need to be in this order because otherwise when
 	  // there is a raw link  in the notes, it will be overwritten
+	  
+	  showBar(imageCount > 0);
 	};
 
 	// When the page finishes loading

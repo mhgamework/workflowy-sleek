@@ -6,11 +6,14 @@
     text-decoration: none;
     cursor: pointer;
 }
-div.page.active{
-	//width:900px !important;
+.fixPageLeft{
 	transform:none !important;
 	margin-left:20px;
 }
+/*div.page.active{
+	transform:none !important;
+	margin-left:20px;
+}*/
 .imageBar img{
 	box-shadow: 0 0 20px #831;
 	margin-bottom:5px;
