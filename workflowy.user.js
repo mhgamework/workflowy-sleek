@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workflowy-sleek
 // @namespace    http://getsleek.co/
-// @version      0.3.4
+// @version      0.4.0
 // @description  Sleek customizations to workflowy
 // @author       MHGameWork
 // @match        https://*workflowy.com/*
@@ -22,8 +22,9 @@
 		return theNew;
 	}
 	
-    function createButton(query){
-        var theNew = createButtonToToolbar(query);
+    function createButton(query,label){
+		if (label === undefined) label=query;
+        var theNew = createButtonToToolbar(label);
 
         theNew.click(function () {
             var toSet = query;
@@ -59,14 +60,16 @@
 	var $imagebar = createImageBar();
 	
 
-    var imagesbtn$ = createButtonToToolbar("Images: Shown");
-	createButton("@status OR #open-sprint");
+	createButton("@status OR #open-sprint","Stat/sprint");
+    var imagesbtn$ = createButtonToToolbar("Images: Y");
+	var viewmodebtn$ = createButtonToToolbar("V: Bullets");
+	
 	var imageCount = 0;
 	
 	var imageEnabled = true;
 	imagesbtn$.click(function () {
 		imageEnabled = !imageEnabled;
-		imagesbtn$.text(imageEnabled ? "Images: Shown": "Images: Hidden");
+		imagesbtn$.text(imageEnabled ? "Images: Y": "Images: N");
 		imagesbtn$.toggleClass("active", imageEnabled);
 		showBar(imageCount > 0);
 		/*var toSet = query;
@@ -87,6 +90,17 @@
 		$("div.page.active").toggleClass("fixPageLeft",enabled);
 		$imagebar.toggle(enabled);
 	}
+	
+	
+	var viewModeEnabled = false;
+	viewmodebtn$.click(function () {
+		viewModeEnabled = !viewModeEnabled;
+		viewmodebtn$.text(viewModeEnabled ? "V: Pretty": "V: Bullets");
+		viewmodebtn$.toggleClass("active", viewModeEnabled);
+		
+		$('body').toggleClass('viewMode');
+	
+	});
 
 
 	

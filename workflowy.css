@@ -74,3 +74,36 @@ transform: translate(-50%, -50%);
 	/** Unhide lightbox **/
 	display: block;
 }
+
+.viewMode .project.selected>.children > .project.open > .name {
+    font-size: 20px;
+    list-style: none;
+    padding-bottom:10px;
+}
+.viewMode .project.selected>.children > .project >.children > .project.open > .name {
+    font-size: 16px;
+    list-style: none;
+    padding-bottom:5px;
+}
+
+.viewMode .bullet{
+/*    left:-20px;  */
+}
+.viewMode .project > .name > .bullet {
+    visibility:hidden;
+}
+.viewMode .project:hover > .name > .bullet {
+    visibility:visible;
+}
+
+/* .selected .project>.name {
+    margin-left: 0px;
+    padding: 0px;
+} */
+.viewMode .content{
+    padding-bottom:5px;
+}
+.viewMode #controls{
+    margin:0px;
+    padding:0px;
+}
